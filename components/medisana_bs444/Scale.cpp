@@ -97,7 +97,9 @@ namespace medisana_bs444
     Person result;
 
     result.valid = (values[0] == 0x84);
-    result.person = values[2];
+    //if no persons are configured on scale, it sends person 255
+    //turn 255 into 0 for streamlined naming & processing later
+    result.person = values[2] = 255 ? 0 : values[2];
     result.male = (values[4] == 1);
     result.age = values[5];
     result.size = values[6] / 100.0;
