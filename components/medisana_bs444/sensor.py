@@ -33,7 +33,7 @@ MedisanaBS444 = medisana_bs444_ns.class_(
     "MedisanaBS444", cg.Component, ble_client.BLEClientNode
 )
 
-SUPPORTED_PERSON_COUNT  = 8
+SUPPORTED_PERSON_COUNT = 8
 
 # Generate schema for n persons
 MEASUREMENTS = cv.Schema({
