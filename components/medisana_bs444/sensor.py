@@ -119,32 +119,32 @@ async def to_code(config):
         cg.add(var.set_time_id(time_))
     cg.add(var.use_timeoffset(config[CONF_TIME_OFFSET]))
 
-    for x in range(1, 9):
+    for x in range(0, SUPPORTED_PERSON_COUNT+1):
         CONF_VAL = "%s_%s" %(CONF_WEIGHT,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_weight(x-1, sens))
+            cg.add(var.set_weight(x, sens))
         CONF_VAL = "%s_%s" %(CONF_BMI,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_bmi(x-1, sens))
+            cg.add(var.set_bmi(x, sens))
         CONF_VAL = "%s_%s" %(CONF_KILOCALORIERS,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_kcal(x-1, sens))
+            cg.add(var.set_kcal(x, sens))
         CONF_VAL = "%s_%s" %(CONF_FAT,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_fat(x-1, sens))
+            cg.add(var.set_fat(x, sens))
         CONF_VAL = "%s_%s" %(CONF_TBW,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_tbw(x-1, sens))
+            cg.add(var.set_tbw(x, sens))
         CONF_VAL = "%s_%s" %(CONF_MUSCLE,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_muscle(x-1, sens))
+            cg.add(var.set_muscle(x, sens))
         CONF_VAL = "%s_%s" %(CONF_BONE,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
-            cg.add(var.set_bone(x-1, sens))
+            cg.add(var.set_bone(x, sens))
