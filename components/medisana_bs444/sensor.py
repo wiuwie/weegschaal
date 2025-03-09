@@ -34,13 +34,14 @@ MedisanaBS444 = medisana_bs444_ns.class_(
 )
 
 SUPPORTED_PERSON_COUNT = 8
+POSSIBLE_PERSON_VALUE_COUNT = 1 + SUPPORTED_PERSON_COUNT;
 
 # Generate schema for n persons
 MEASUREMENTS = cv.Schema({
 
     });
 
-for x in range(0, SUPPORTED_PERSON_COUNT+1):
+for x in range(0, POSSIBLE_PERSON_VALUE_COUNT+1):
     MEASUREMENTS = MEASUREMENTS.extend(
        cv.Schema(
         {
@@ -119,7 +120,7 @@ async def to_code(config):
         cg.add(var.set_time_id(time_))
     cg.add(var.use_timeoffset(config[CONF_TIME_OFFSET]))
 
-    for x in range(0, SUPPORTED_PERSON_COUNT+1):
+    for x in range(0, POSSIBLE_PERSON_VALUE_COUNT+1):
         CONF_VAL = "%s_%s" %(CONF_WEIGHT,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
