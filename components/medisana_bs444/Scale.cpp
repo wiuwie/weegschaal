@@ -97,9 +97,11 @@ namespace medisana_bs444
     Person result;
 
     result.valid = (values[0] == 0x84);
+    
     //if no persons are configured on scale, it sends person 255
     //turn 255 into 0 for streamlined naming & processing later
-    result.person = values[2] == 255 ? 0 : values[2];
+    result.person = (values[2] == 255) ? 0 : values[2];
+    
     result.male = (values[4] == 1);
     result.age = values[5];
     result.size = values[6] / 100.0;
@@ -155,7 +157,10 @@ namespace medisana_bs444
     result.valid = (values[0] == 0x1d);
     result.weight = ((values[2] << 8) | values[1]) / 100.0;
     result.timestamp = sanitize_timestamp((values[8] << 24) | (values[7] << 16) | (values[6] << 8) | values[5], useTimeoffset);
-    result.person = values[13];
+    
+    //if no persons are configured on scale, it sends person 255
+    //turn 255 into 0 for streamlined naming & processing later
+    result.person = (values[13] == 255) ? 0 : values[13];
 
     return result;
   }
@@ -208,7 +213,11 @@ namespace medisana_bs444
 
     result.valid = (values[0] == 0x6f);
     result.timestamp = sanitize_timestamp((values[4] << 24) | (values[3] << 16) | (values[2] << 8) | values[1], useTimeoffset);
-    result.person = (values[5]);
+
+    //if no persons are configured on scale, it sends person 255
+    //turn 255 into 0 for streamlined naming & processing later
+    result.person = (values[5] == 255) ? 0 : values[5];
+    
     result.kcal = (values[7] << 8 | values[6]);
     result.fat = (0x0fff & (values[9] << 8 | values[8])) / 10.0;
     result.tbw = (0x0fff & (values[11] << 8 | values[10])) / 10.0;
