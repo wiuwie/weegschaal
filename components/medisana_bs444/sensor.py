@@ -33,12 +33,14 @@ MedisanaBS444 = medisana_bs444_ns.class_(
     "MedisanaBS444", cg.Component, ble_client.BLEClientNode
 )
 
-# Generate schema for 8 persons
+SUPPORTED_PERSON_COUNT  = 8
+
+# Generate schema for n persons
 MEASUREMENTS = cv.Schema({
 
     });
 
-for x in range(1, 8):
+for x in range(1, SUPPORTED_PERSON_COUNT+1):
     MEASUREMENTS = MEASUREMENTS.extend(
        cv.Schema(
         {
@@ -117,7 +119,7 @@ async def to_code(config):
         cg.add(var.set_time_id(time_))
     cg.add(var.use_timeoffset(config[CONF_TIME_OFFSET]))
 
-    for x in range(1, 8):
+    for x in range(1, SUPPORTED_PERSON_COUNT+1):
         CONF_VAL = "%s_%s" %(CONF_WEIGHT,x)
         if CONF_VAL in config:
             sens = await sensor.new_sensor(config[CONF_VAL])
