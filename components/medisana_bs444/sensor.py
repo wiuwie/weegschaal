@@ -34,7 +34,7 @@ MedisanaBS444 = medisana_bs444_ns.class_(
 )
 
 SUPPORTED_PERSON_COUNT = 8
-PERSON_RANGE = range(0, (SUPPORTED_PERSON_COUNT + 1))
+PERSON_RANGE = range(0, SUPPORTED_PERSON_COUNT + 1)
 
 # Generate schema for n persons
 MEASUREMENTS = cv.Schema({
